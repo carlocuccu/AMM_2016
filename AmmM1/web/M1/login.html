@@ -6,17 +6,29 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>La bottega del suono - Login</title>
+        <title>Login - La bottega del suono</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Carlo Cuccu" >
         <meta name="description" content="Vendita strumenti nuovi e usati - Login page" >
-        <meta name="keywords" content="strumenti musicali, chitarre elettriche, chitarre acustiche, 
-              bassi elettrici, bassi acustici, batterie acustiche">
-    </head>
+        <meta name="keywords" content="chitarre elettriche, chitarra acustica, bassi elettrici, bassi acustici, batterie acustiche,
+              trombe, sax, custodia, jack">
     <body>
-        <h2>Login Page</h2>    
-    
+        <h2>Login Page</h2>            
+        <div>
+            <form>
+                <label for="usr">Username</label>
+                <input type="text" name="username" id="usr" />
+           
+                <label for="psw">Password</label>
+                <input type="password" name="password" id="psw" />
+
+                <button type="submit">Invia</button>
+
+                <button type="reset">Azzera campi</button>
+            </form>
+        </div>
+        
         <nav>
             <h2>Sezioni</h2>
             <ol>
@@ -25,21 +37,6 @@ and open the template in the editor.
                 <li><a href="cliente.html">Cliente</a></li>
             </ol>
         </nav>
-        
-        <form>
-            <label for="usr">Username</label>
-            <input type="text" name="username" id="usr" />
-            <br />
-            <label for="psw">Password</label>
-            <input type="password" name="password" id="psw" />
-            
-            <br /><br />
-            <button type="submit">Invia</button>
-            
-            <br />
-            <button type="reset">Azzera campi</button>
-        </form>
-        
         
     </body>
 </html>
