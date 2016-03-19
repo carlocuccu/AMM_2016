@@ -16,7 +16,8 @@
         </head>
         <body>
             <h2>Vendi</h2>
-
+            
+            <!-- Sezione di navigazione del sito -->
             <nav>
                 <h2>Sezioni</h2>
                 <ol>
@@ -25,10 +26,14 @@
                 </ol>
             </nav>
 
+            <!-- Form per l'inserimento di nuovi annunci -->
             <div>
                 <form action="venditore.html" method="post">
                     <label for="nomeOggetto">Nome oggetto</label>
                     <input type="text" name="nomeOggetto" id="nomeOggetto">
+                    
+                    <label for="immagineOggetto">Inserisci URL dell'immagine</label>
+                    <input type="url" name="immagineOggetto" id="immagineOggetto">
 
                     <label for="descrizioneOggetto">Descrizione</label>
                     <textarea rows="10" cols="20" name="descrizioneOggetto" id="descrizioneOggetto"></textarea>
@@ -40,5 +45,6 @@
                     <input type="number" name="numeroOggetti" id="numeroOggetti">
                 </form>
             </div>
+            
         </body>
     </html>
