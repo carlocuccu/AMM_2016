@@ -1,0 +1,50 @@
+    <!DOCTYPE html>
+    <!--
+    To change this license header, choose License Headers in Project Properties.
+    To change this template file, choose Tools | Templates
+    and open the template in the editor.
+    -->
+    <html>
+        <head>
+            <title>Vendi - La bottega del suono</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="author" content="Carlo Cuccu" >
+            <meta name="description" content="Vendita strumenti nuovi e usati - seller page" >
+            <meta name="keywords" content="chitarre elettriche, chitarra acustica, bassi elettrici, bassi acustici, batterie acustiche,
+                  trombe, sax, custodia, jack">
+        </head>
+        <body>
+            <h1>Vendi</h1>
+            
+            <!-- Sezione di navigazione del sito -->
+            <nav>
+                <h2>Sezioni</h2>
+                <ol>
+                    <li><a href="descrizione.html">Descrizione</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ol>
+            </nav>
+
+            <!-- Form per l'inserimento di nuovi annunci -->
+            <div>
+                <form action="venditore.html" method="post">
+                    <label for="nomeOggetto">Nome oggetto</label>
+                    <input type="text" name="nomeOggetto" id="nomeOggetto">
+                    
+                    <label for="immagineOggetto">Inserisci URL dell'immagine</label>
+                    <input type="url" name="immagineOggetto" id="immagineOggetto">
+
+                    <label for="descrizioneOggetto">Descrizione</label>
+                    <textarea rows="10" cols="20" name="descrizioneOggetto" id="descrizioneOggetto"></textarea>
+
+                    <label for="prezzo">Prezzo</label>
+                    <input type="number" step="0.1" name="prezzo" id="prezzo">
+
+                    <label for="numeroOggetti">Quantità disponibile</label>
+                    <input type="number" name="numeroOggetti" id="numeroOggetti" min="0">
+                </form>
+            </div>
+            
+        </body>
+    </html>
