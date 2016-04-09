@@ -13,33 +13,60 @@ and open the template in the editor.
         <meta name="description" content="Vendita strumenti nuovi e usati - Login page" >
         <meta name="keywords" content="chitarre elettriche, chitarra acustica, bassi elettrici, bassi acustici, batterie acustiche,
               trombe, sax, custodia, jack">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    </head>
+    
     <body>
-        <h1>Login Page</h1>            
-        
-        <!-- Form per l'accesso al sito -->
-        <div>
-            <form action="login.html" method="post">
-                <label for="usr">Username</label>
-                <input type="text" name="username" id="usr" />
-           
-                <label for="psw">Password</label>
-                <input type="password" name="password" id="psw" />
+        <div id="page">
+            <header>
+                <div id="header">           
+                    <!-- Form per l'accesso al sito -->
+                    
+                    <div id="logo">
+                        <h1>La bottega del suono</h1>
+                    </div>
+                </div> 
+            </header>
+                
+                      
+                <!-- Sezione di navigazione del sito -->
+                <nav id="leftSidebar" class="normalLink">
+                    <h3>Sezioni</h3>
+                    <ul>
+                        <li><a href="descrizione.html">Descrizione</a></li>
+                        <li><a href="venditore.html">Venditore</a></li>
+                        <li><a href="cliente.html">Cliente</a></li>
+                    </ul>
+                </nav>
 
-                <button type="submit">Invia</button>
+                <div id="content">
 
-                <button type="reset">Azzera campi</button>
-            </form>
+                    <div class="formPosition">
+                        <h2>Inserisci le credenziali per l'accesso</h2>
+                        <form action="login.html" method="post">
+                            <label for="usr">Username</label>
+                            <input type="text" name="username" id="usr" />
+                       
+                            <label for="psw">Password</label>
+                            <input type="password" name="password" id="psw" />
+
+                            <button type="submit">Invia</button>
+
+                            <button type="reset">Azzera campi</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="footer">
+                        <ul>
+                            <li id="fb"><a href="http://www.facebook.com"></a></li>
+                            <li id="twitter"><a href="http://twitter.com/"></a></li>
+                            <li id="youtube"><a href="http://www.youtube.com/"></a></li>
+                        </ul>
+                </div>
+
+
         </div>
-        
-        <!-- Sezione di navigazione del sito -->
-        <nav>
-            <h2>Sezioni</h2>
-            <ol>
-                <li><a href="descrizione.html">Descrizione</a></li>
-                <li><a href="venditore.html">Venditore</a></li>
-                <li><a href="cliente.html">Cliente</a></li>
-            </ol>
-        </nav>
         
     </body>
 </html>

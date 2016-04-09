@@ -5,46 +5,72 @@
     and open the template in the editor.
     -->
     <html>
-        <head>
-            <title>Vendi - La bottega del suono</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta name="author" content="Carlo Cuccu" >
-            <meta name="description" content="Vendita strumenti nuovi e usati - seller page" >
-            <meta name="keywords" content="chitarre elettriche, chitarra acustica, bassi elettrici, bassi acustici, batterie acustiche,
-                  trombe, sax, custodia, jack">
-        </head>
-        <body>
-            <h1>Vendi</h1>
+            <head>
+                    <title>Vendi - La bottega del suono</title>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta name="author" content="Carlo Cuccu" >
+                    <meta name="description" content="Vendita strumenti nuovi e usati - seller page" >
+                    <meta name="keywords" content="chitarre elettriche, chitarra acustica, bassi elettrici, bassi acustici, batterie acustiche,
+                          trombe, sax, custodia, jack">
+                    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+            </head>
             
-            <!-- Sezione di navigazione del sito -->
-            <nav>
-                <h2>Sezioni</h2>
-                <ol>
-                    <li><a href="descrizione.html">Descrizione</a></li>
-                    <li><a href="login.html">Login</a></li>
-                </ol>
-            </nav>
-
-            <!-- Form per l'inserimento di nuovi annunci -->
-            <div>
-                <form action="venditore.html" method="post">
-                    <label for="nomeOggetto">Nome oggetto</label>
-                    <input type="text" name="nomeOggetto" id="nomeOggetto">
+            <body>
+                <div id="page">
                     
-                    <label for="immagineOggetto">Inserisci URL dell'immagine</label>
-                    <input type="url" name="immagineOggetto" id="immagineOggetto">
+                    <div id="header">           
+                        <!-- Form per l'accesso al sito -->
+                        
+                        <div id="logo">
+                            <h1>La bottega del suono</h1>
+                        </div>
+                    </div>           
+                    
+                    <!-- Sezione di navigazione del sito -->
+                    <nav id="leftSidebar" class="normalLink">
+                        <h3>Sezioni</h3>
+                        <ul>
+                            <li><a href="descrizione.html">Descrizione</a></li>
+                            <li><a href="login.html">Login</a></li>
+                        </ul>
+                    </nav>
 
-                    <label for="descrizioneOggetto">Descrizione</label>
-                    <textarea rows="10" cols="20" name="descrizioneOggetto" id="descrizioneOggetto"></textarea>
+                    <!-- Form per l'inserimento di nuovi annunci -->
+                    <div id="content">
+                        <div class="formPosition">
+                            <h2>Inserisci l'oggetto da mettere in vendita</h2>
+                            <form action="venditore.html" method="post">
+                                <label for="nomeOggetto">Nome oggetto</label>
+                                <input type="text" name="nomeOggetto" id="nomeOggetto">
+                                
+                                <label for="immagineOggetto">Inserisci URL dell'immagine</label>
+                                <input type="url" name="immagineOggetto" id="immagineOggetto">
 
-                    <label for="prezzo">Prezzo</label>
-                    <input type="number" step="0.1" name="prezzo" id="prezzo">
+                                <label for="descrizioneOggetto">Descrizione</label>
+                                <textarea rows="10" cols="20" name="descrizioneOggetto" id="descrizioneOggetto"></textarea>
 
-                    <label for="numeroOggetti">Quantità disponibile</label>
-                    <input type="number" name="numeroOggetti" id="numeroOggetti" min="0">
-                </form>
-            </div>
-            
-        </body>
+                                <label for="prezzo">Prezzo</label>
+                                <input type="number" step="0.1" name="prezzo" id="prezzo" min="0">
+
+                                <label for="numeroOggetti">Quantità disponibile</label>
+                                <input type="number" name="numeroOggetti" id="numeroOggetti" min="0">
+
+                                <button type="submit">Invia</button>
+
+                                <button type="reset">Azzera campi</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="footer">
+                        <ul>
+                            <li id="fb"><a href="http://www.facebook.com"></a></li>
+                            <li id="twitter"><a href="http://twitter.com/"></a></li>
+                            <li id="youtube"><a href="http://www.youtube.com/"></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </body>
     </html>

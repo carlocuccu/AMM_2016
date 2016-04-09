@@ -13,89 +13,103 @@ and open the template in the editor.
         <meta name="description" content="Vendita strumenti nuovi e usati - customer page" >
         <meta name="keywords" content="chitarre elettriche, chitarra acustica, bassi elettrici, bassi acustici, batterie acustiche,
               trombe, sax, custodia, jack">
+        
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen">
     </head>
     
     <body>
-        
-        <h1>Compra</h1>
-        
-        <!-- Sezione di navigazione del sito -->
-        <nav>
-            <h2>Sezioni</h2>
-            <ol>
-                <li><a href="descrizione.html">Descrizione</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ol>
-        </nav>
-        
-        <!-- Esposizione annunci -->
-        <div>
-            <table>
-                <tr>
-                    <th>Oggetto</th>
-                    <th>Foto</th>
-                    <th>Quantità disponibile</th>
-                    <th>Prezzo</th>
-                    <th>Aggiungi al carrello</th>
-                </tr>
-                
-                <tr>
-                    <td>Fender Stratocaster Classic 50</td>
-                    <td> <img title="fender stratocaster classic 50"
-                              alt="fender stratocaster classic 50" src="img/fender-classic-50s-stratocaster.jpg"
-                              width="150" height="150">
-                    </td>
-                    <td>3</td>
-                    <td>500€</td>
-                    <td><a href="cliente.html">Aggiungi al carrello</a></td>
-                </tr>
-                
-                <tr>
-                    <td>Basso Fender Jazz</td>
-                    <td> <img title="basso fender jazz"
-                              alt="basso fender jazz" src="img/fenderJazz.jpg"
-                              width="185" height="150">
-                    </td>
-                    <td>20</td>
-                    <td>700€</td>
-                    <td><a href="cliente.html">Aggiungi al carrello</a></td>
-                </tr>
-                
-                <tr>
-                    <td>Batteria Ludwig Classic Mapple</td>
-                    <td><img title="batteria ludwig classic mapple"
-                              alt="batteria ludwig classic mapple" src="img/classicMapple.jpg"
-                              width="150" height="150">
-                    </td>
-                    <td>32</td>
-                    <td>1700€</td>
-                    <td><a href="cliente.html">Aggiungi al carrello</a></td>
-                </tr>
-                
-                <tr>
-                    <td>Tamaky Classica</td>
-                    <td><img title="tamaky classica"
-                              alt="tamaky classica" src="img/tamaky.jpeg"
-                              width="150" height="150">
-                    </td>
-                    <td>15</td>
-                    <td>20€</td>
-                    <td><a href="cliente.html">Aggiungi al carrello</a></td>
-                </tr>
-                
-                <tr>
-                    <td>Flauto Aulos</td>
-                    <td><img title="flauto aulos"
-                              alt="flauto aulos" src="img/aulos.jpg"
-                              width="150" height="150"></td>
-                    <td>347</td>
-                    <td>10€</td>
-                    <td><a href="cliente.html">Aggiungi al carrello</a></td>
-                </tr>
-                
-            </table>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <h1>La bottega del suono</h1>
+                </div>
+            </div>
+            
+            <!-- Sezione di navigazione del sito -->
+            <nav id="leftSidebar" class="normalLink">
+                <h3>Sezioni</h3>
+                <ul>
+                    <li><a href="descrizione.html">Descrizione</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Esposizione annunci -->
+            <div id="content" class="normalLink">
+                <h2>Seleziona un oggetto da acquistare</h2>
+                <table>
+                    <tr class="intestazione">
+                        <th>Oggetto</th>
+                        <th>Foto</th>
+                        <th>Quantità disponibile</th>
+                        <th>Prezzo</th>
+                        <th>Aggiungi al carrello</th>
+                    </tr>
+                    
+                    <tr class="pari">
+                        <td>Fender Stratocaster Classic 50</td>
+                        <td> <img title="fender stratocaster classic 50"
+                                  alt="fender stratocaster classic 50" src="img/fender-classic-50s-stratocaster.jpg"
+                                  width="150" height="150">
+                        </td>
+                        <td>3</td>
+                        <td>500€</td>
+                        <td class="carrello"><a href="cliente.html"></a></td>
+                    </tr>
+                    
+                    <tr class="dispari">
+                        <td>Basso Fender Jazz</td>
+                        <td> <img title="basso fender jazz"
+                                  alt="basso fender jazz" src="img/fenderJazz.jpg"
+                                  width="185" height="150">
+                        </td>
+                        <td>20</td>
+                        <td>700€</td>
+                        <td class="carrello"><a href="cliente.html"></a></td>
+                    </tr>
+                    
+                    <tr class="pari">
+                        <td>Batteria Ludwig Classic Mapple</td>
+                        <td><img title="batteria ludwig classic mapple"
+                                  alt="batteria ludwig classic mapple" src="img/classicMapple.jpg"
+                                  width="150" height="150">
+                        </td>
+                        <td>32</td>
+                        <td>1700€</td>
+                        <td class="carrello"><a href="cliente.html"></a></td>
+                    </tr>
+                    
+                    <tr class="dispari"> 
+                        <td>Tamaky Classica</td>
+                        <td><img title="tamaky classica"
+                                  alt="tamaky classica" src="img/tamaky.jpeg"
+                                  width="150" height="150">
+                        </td>
+                        <td>15</td>
+                        <td>20€</td>
+                        <td class="carrello"><a href="cliente.html"></a></td>
+                    </tr>
+                    
+                    <tr class="pari">
+                        <td>Flauto Aulos</td>
+                        <td><img title="flauto aulos"
+                                  alt="flauto aulos" src="img/aulos.jpg"
+                                  width="150" height="150"></td>
+                        <td>347</td>
+                        <td>10€</td>
+                        <td class="carrello"><a href="cliente.html"></a></td>
+                    </tr>
+                    
+                </table>
+            </div>
+
+           <div id="footer">
+                    <ul>
+                        <li id="fb"><a href="http://www.facebook.com"></a></li>
+                        <li id="twitter"><a href="http://twitter.com/"></a></li>
+                        <li id="youtube"><a href="http://www.youtube.com/"></a></li>
+                    </ul>
+            </div>
         </div>
-        
-        
     </body>
 </html>
