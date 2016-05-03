@@ -1,0 +1,519 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24-mar-2016, 19.30.04
+    Author     : carlo
+*/
+
+/*Font per i paragrafi*/
+@font-face{font-family: "Cabin-Regular"; src: url(font/Cabin-Regular.otf);}  
+/*Font per i titoli intermedi*/
+@font-face{font-family: "Cabin-MediumItalic"; src: url(font/Cabin-MediumItalic.otf);}   
+/*Font per il titolo principale*/
+@font-face{font-family: "Lobster"; src: url(font/Lobster.otf);}
+
+
+
+/* impostazioni principali del layout */
+
+body{
+    font-family: "Cabin-Regular", Arial, sans-serif;
+    font-size: 1em;
+
+    background-image: url('cssStyle/bianco con gradiente lati.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; /*Permette di ridimensionare l'immagine di sfondo in base alla
+                               larghezza della finestra del browser'*/  
+}
+
+#page{
+    background-color: white;
+}
+
+#header, #footer{
+    background-color: #484848;
+    color: white;
+}
+
+#clear{
+    height: 150px;
+}
+
+h1{font-family: "Lobster"}
+h2, h3{font-family: "Cabin-MediumItalic"}
+
+.contentMessage{
+    padding-top: 50px;
+}
+
+ul{
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#leftSidebar a:link, a:visited {
+    margin-top: 2%;
+    margin-left: 2%;
+    width: 180px;
+    height: 13px;
+}
+
+.normalLink a:link, a:visited {
+    text-decoration: none;
+    background-color: #4B4B4B;
+    color: white;
+    width: 180px;
+    height: 13px;
+    padding: 8px 1px;
+    padding-bottom: 12px;
+    margin-bottom: 2px;
+    text-align: center;
+    display: inline-block;
+    
+}
+
+.normalLink  a:hover,a:active {
+    background-color: #242424;
+    text-decoration: underline;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.carrello a:link,a:visited{
+        background-color: transparent;
+        width: 50px;
+        height: 30px;
+        background-image: url('cssStyle/carrello.png');
+        background-size: 50px 50px;
+        background-repeat: no-repeat;
+    }
+
+.carrello a:hover,a:active{
+    text-decoration: none;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+/*Formattazione di form e bottoni*/
+input{
+    width: 15%;
+    padding: 7px 15px;
+    border: 1px solid #242424;
+    border-radius: 6px;
+    background-color: #DDDDDD;
+}
+
+input:focus{
+        border: 3px solid #555;
+}
+
+button[type=submit], button[type=reset]{
+    border: none;
+    background-color: #484848;
+    color: white;
+    width: 180px;
+    height: 35px;
+    padding: 8px 1px;
+    padding-bottom: 12px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+button:hover{
+    background-color: #242424;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#confirmButton{
+    margin-top: 40px;
+}
+
+textarea{
+    border: 1px solid #242424;
+    border-radius: 6px;
+    background-color: #DDDDDD;
+}
+
+textarea:focus{
+    border: 3px solid #555;
+}
+
+/*Gestione ridimensionamento automatico delle immagini*/
+img {
+    max-width: 100%;
+    height: auto;
+}  
+
+
+/*Gestione delle tabelle*/
+table, td, tr{
+    text-align: center;
+    table-layout: fixed;
+    width: 100%;
+    word-wrap: break-word;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr:nth-child(2n+1).intestazione{
+    background-color: #484848;
+    color: white;
+}
+
+tr:nth-child(2n+1){
+    background-color: #808080;
+}
+
+tr:nth-child(2n){
+    background-color: #DDDDDD;
+}
+
+.leftColTable{
+    width: 20%;
+    text-align: left;    
+}
+
+
+/*Stile dei link esterni alla pagina presenti nel footer*/
+#footer{
+    margin-top: 80px;
+    width: 100%;
+    height: 39px;
+}
+
+
+#footer li{
+    float: right;
+    display: inline;
+}   
+
+#footer a:link,a:visited,a:active{     
+    margin-top: 3px;
+    margin-right: 10px;
+    display: inline-block;        
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;   
+}
+
+#footer a:hover{
+    background-color:  white;
+    box-shadow: 0 12px 16px 0 rgba(0,32,42,82.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#fb a:link,a:visited{
+    background-image: url('cssStyle/fb.png');
+}
+
+#twitter a:link,a:visited{
+    background-image: url('cssStyle/twitter.png');
+}
+
+#youtube a:link,a:visited{
+    background-image: url('cssStyle/youtube.png');
+}
+
+
+
+/* Gestione visualizzazione per differenti dispositivi */
+@media only screen and (min-width: 1024px) {
+
+    body{
+        font-size: 1em;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 1%;
+    }
+
+    #page {
+        border-radius: 18px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #header{
+        border-radius: 18px;
+        width: auto;
+        height: 70px;
+        padding: 5px 15px;
+        top: -10px;
+    }
+
+
+    div#logo h1 {
+        background-image: url('cssStyle/logo.png');
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: 100px 80px;
+        
+        height: 100px;
+        vertical-align: middle;
+        padding-left: 100px;
+        margin-left: -15px;
+        margin-top: -1px;
+        margin-bottom: 0px;
+        line-height: 100px;
+        display: block;
+    }
+
+    #leftSidebar {
+        position: fixed;
+        width: 200px;
+        padding-left: 5px;
+        margin-top: 20px;
+    }
+
+    #leftSidebar h3{
+        margin-left: 10px;
+    }
+
+    #sommario{
+        margin-top: 20px;
+    }
+
+    #content{
+        width: 65%;
+        margin-left: 25%;
+        margin-right: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+    }
+
+    #content table{
+        width: 100%;
+        margin-left: -1%;
+    }
+    
+    .formPosition{
+        margin-left: 65px;
+        margin-top: 30px;
+    }
+
+    
+
+    textarea{
+        resize: none;
+        display: block;
+        width: 425px;
+    }
+
+    input[type=text], input[type=url], input[type=number], input[type=password]{
+        display: block;
+        width: 400px;
+        margin-bottom: 30px;
+    }
+
+
+
+ }
+
+
+
+
+ @media only screen and (min-width: 600px) and (max-width: 1024px){
+
+    body{
+        width: 99%;
+        margin-left: 1%;
+        margin-right: 1%;   
+    }
+
+    #page {
+        border-radius: 18px;
+        width: 98%;
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+
+    #header{
+        border-radius: 18px;
+        width: auto;
+        height: 70px;
+        padding: 5px 15px;
+        top: -10px;
+    }
+
+    div#logo h1 {
+        background-image: url('cssStyle/logo.png');
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: 100px 80px;
+        
+        height: 100px;
+        vertical-align: middle;
+        padding-left: 100px;
+        margin-left: -15px;
+        margin-top: -1px;
+        margin-bottom: 0px;
+        line-height: 100px;
+        display: block;
+    }
+
+    nav#leftSidebar{
+        background-color: #969696;
+        padding-left: 3%;
+    }
+
+
+
+    #leftSidebar li{
+        display: inline;
+    }
+
+    #leftSidebar a:link,a:visited{
+            margin-top: 0%;
+            margin-left: 0%;
+            width: 160px;
+            height: 13px;
+    }
+
+    #leftSidebar #login{
+        width: 7%;
+        float: right;
+        margin-right: 3%;
+    }
+
+
+    #leftSidebar h3{
+        display: none;
+    }
+
+
+    #sommario{
+        margin-top: 20px;
+    }
+
+    #content{
+        margin-left: 8%;
+        margin-right: 10%;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+    
+    .formPosition{
+        margin-left: 15%;
+        margin-top: 30px;
+    }
+
+    
+
+    textarea{
+        resize: none;
+        display: block;
+        width: 425px;
+    }
+
+    input[type=text], input[type=url], input[type=number], input[type=password]{
+        display: block;
+        width: 400px;
+        margin-bottom: 30px;
+    }
+ }  
+
+ 
+
+
+ @media only screen and (max-width: 600px){
+
+    body{
+        width: 99%;
+        margin-left: 1%;
+        margin-right: 1%;   
+    }
+
+    #page {
+        border-radius: 18px;
+        width: 98%;
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+
+    #header{
+        border-radius: 18px;
+        width: auto;
+        height: 70px;
+        padding: 5px 15px;
+        top: -10px;
+    }
+
+    div#logo h1 {
+        font-size: 110%;
+        background-image: url('cssStyle/logo.png');
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: 100px 80px;
+        
+        height: 100px;
+        vertical-align: middle;
+        padding-left: 100px;
+        margin-left: -15px;
+        margin-top: -1px;
+        margin-bottom: 0px;
+        line-height: 100px;
+        display: block;
+    }
+
+    nav#leftSidebar{
+        padding-left: 15%;
+    }
+
+
+
+    #leftSidebar a:link,a:visited{
+            margin-top: 0%;
+            margin-left: 0%;
+            width: 260px;
+            height: 10px;
+    }
+
+    #leftSidebar #login{
+        width: 260px;
+        margin-right: 3%;
+    }
+
+    #leftSidebar h3{
+        display: none;
+    }
+
+
+    #sommario{
+        margin-top: 20px;
+    }
+
+    #content{
+        margin-left: 8%;
+        margin-right: 10%;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+
+    
+    .formPosition{
+        margin-left: 4%;
+        margin-top: 30px;
+    }  
+
+    textarea{
+        resize: none;
+        display: block;
+        width: 90%;
+    }
+
+    input[type=text], input[type=url], input[type=number], input[type=password]{
+        display: block;
+        width: 80%;
+        margin-bottom: 30px;
+    }
+
+    button[type=submit], button[type=reset]{
+        margin-bottom: 15px;
+    }
+ }  
+
