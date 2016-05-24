@@ -39,6 +39,7 @@
                     <nav id="leftSidebar" class="normalLink">
                         <h3>Sezioni</h3>
                         <ul>
+                            <li><a href="oggettiVenditore.html">I tuoi oggetti in vendita</a></li>
                             <li><a href="descrizione.html">Descrizione</a></li>
                             <li><a href="login.html">Login</a></li>
                             <c:if test="${loggedId == true}">
@@ -50,10 +51,6 @@
                     <!-- Form per l'inserimento di nuovi annunci -->
                     <div id="content">
                         <div class="formPosition">
-                            
-                            <c:if test="${loggedId == true}">
-                                <h2>Benvenuto ${venditore.username}</h2>
-                            </c:if>
                                                        
                             <h2>Inserisci l'oggetto da mettere in vendita</h2>
                             

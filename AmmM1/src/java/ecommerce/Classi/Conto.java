@@ -2,9 +2,9 @@ package ecommerce.Classi;
 
 public class Conto{
 	Double saldo;
-        String id;
+        Integer id;
         
-        public Conto(Double saldo, String id){
+        public Conto(Double saldo, Integer id){
             this.saldo=saldo;
             this.id=id;
         }

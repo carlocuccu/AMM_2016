@@ -39,8 +39,10 @@
                     <h3>Sezioni</h3>
                     <ul>
                         <li><a href="login.html" id="login">Login</a></li>
+                        <c:if test="${loggedId == true}">
+                            <li><a href="cliente.html?logout=true">Logout</a></li>
+                        </c:if>
                         <li><a href="descrizione.html">Descrizione</a></li>
-                        <li><a href="venditore.html">Venditore</a></li>
                         <li><a href="cliente.html">Cliente</a></li>
                     </ul>
                 </nav>
@@ -55,11 +57,6 @@
                             </tr>
                             
                             <tr>
-                                <td class="leftColTable">Immagine</td>
-                                <td>${oggettoSelezionato.urlImmagine}</td>
-                            </tr>
-                            
-                            <tr>
                                 <td class="leftColTable">Descrizione</td>
                                 <td>${oggettoSelezionato.descrizione}</td>
                             </tr>
@@ -70,14 +67,15 @@
                             </tr>
                             
                              <tr>
-                                <td class="leftColTable">Quantità</td>
+                                <td class="leftColTable">Quantità disponibile</td>
                                 <td>${oggettoSelezionato.quantita}</td>
                             </tr> 
                     </table>
                             
-                    <form action="cliente.html" method="get">
+                    <form action="cliente.html" method="post">
                         <button type="submit" id="confirmButton" name="idConfermedObj" value="${oggettoSelezionato.id}" > Conferma </button>
                     </form>
+                    
 
                 </div>
                 

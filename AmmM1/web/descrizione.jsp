@@ -44,6 +44,9 @@ and open the template in the editor.
                   <ul>
                         <!-- Link che rimanda alla pagina di login dove sarà possibile accedere alle varie sezioni del sito -->
                         <li><a href="login.html" id="login">Login</a></li>
+                        <c:if test="${loggedId == true}">
+                            <li><a href="descrizione.html?logout=true">Logout</a></li>
+                        </c:if>
                         <!-- Collegamentii alle sezioni interne della pagina descrizione.html -->
                         <li><a href="#categorie">Categorie di strumenti</a></li>
                         <li><a href="#venditore">Istruzioni per i venditori</a></li>

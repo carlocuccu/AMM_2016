@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package ecommerce.Classi;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -11,6 +17,9 @@ import java.util.ArrayList;
  * @author carlo
  */
 public class ClientiFactory {
+    
+    String connectionString;
+    
     private static ClientiFactory singleton;
     public static ClientiFactory getInstance() {
         if (singleton == null) {
@@ -25,52 +34,89 @@ public class ClientiFactory {
     /*Costruttore*/
     private ClientiFactory(){
         
-        /*Cliente 1*/
-        Cliente cli1 = new Cliente();
-        cli1.setId("c1");
-        cli1.setUsername("RossiMario");
-        cli1.setPassword("c1");
-        cli1.setIdConto("cc1");
-        cli1.setConto(ContoFactory.getInstance().getContoByID("cc1"));
-        listaClienti.add(cli1);
-        
-        /*Cliente 2*/
-        Cliente cli2 = new Cliente();
-        cli2.setId("c2");
-        cli2.setUsername("MauroFrau");
-        cli2.setPassword("c2");
-        cli2.setIdConto("cc2");
-        cli2.setConto(ContoFactory.getInstance().getContoByID("cc2"));
-        listaClienti.add(cli2);
-        
-        /*Cliente 3*/
-        Cliente cli3 = new Cliente();
-        cli3.setId("c3");
-        cli3.setUsername("AnnaFabiani");
-        cli3.setPassword("c3");
-        cli3.setIdConto("cc3");
-        cli3.setConto(ContoFactory.getInstance().getContoByID("cc3"));
-        listaClienti.add(cli3);
     }  
     
     
     /* Metodi */
+    
+    //Restituisce la lista di tutti i Clienti
     public ArrayList<Cliente> getClienteList()
     {
+        try 
+        {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "carlocuccu", "0000");
+            Statement stmt = conn.createStatement();
+            String query = "select * from "+ "cliente";
+            ResultSet set = stmt.executeQuery(query);
+            
+             // ciclo sulle righe restituite
+            while(set.next()) 
+            {
+                Cliente current = new Cliente();
+                current.setId(set.getInt("id"));
+                current.setUsername(set.getString("username"));
+                current.setPassword(set.getString("password"));
+                current.setIdConto(set.getInt("idconto"));
+                listaClienti.add(current);
+            } 
+            
+            stmt.close();
+            conn.close();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+     
         return listaClienti;
     }
     
-    public Cliente getClienteByID(String id)
+    
+    // Dato un id restituisce il relativo cliente (se esiste un cliente con quell'id, altrimenti
+    // restituisce null).
+    public Cliente getClienteByID(Integer id)
     {
-        for(Cliente u : listaClienti)
+        try 
         {
-            if(u.id.equals(id))
-                return u;
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "carlocuccu", "0000");
+            String query = "select * from cliente "
+            + "where id = ?";
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // Si associano i valori
+            stmt.setInt(1, id);
+            // Esecuzione query
+            ResultSet res = stmt.executeQuery();
+           
+             // ciclo sulle righe restituite
+            if(res.next()) 
+            {
+                Cliente current = new Cliente();
+                current.setId(res.getInt("id"));
+                current.setUsername(res.getString("username"));
+                current.setPassword(res.getString("password"));
+                current.setIdConto(res.getInt("idconto"));
+                
+                stmt.close();
+                conn.close();
+                return current;
+            }
+            
+            stmt.close();
+            conn.close();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
         }
         return null;
     }
     
-    public String getIdContoById(String id){
+    
+    
+    public Integer getIdContoById(Integer id){
         for(Cliente u : listaClienti)
         {
             if(u.id.equals(id))
@@ -78,4 +124,23 @@ public class ClientiFactory {
         }
         return null;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void setConnectionString(String s){
+    	this.connectionString = s;
+    }
+
+    public String getConnectionString(){
+    	return this.connectionString;
+    } 
 }

@@ -16,6 +16,10 @@ import ecommerce.Classi.Venditore;
 import ecommerce.Classi.VenditoriFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,8 +60,8 @@ public class Cliente extends HttpServlet {
             
             //Ramo che gestisce la pressione del pulsante carrello, relativo ad un oggetto
             if(request.getParameter("idObj") != null && request.getParameter("idConfermedObj") == null){
-                Oggetto buyedObj = OggettiFactory.getInstance().getOggettoByID(request.getParameter("idObj"));
                 
+                Oggetto buyedObj = OggettiFactory.getInstance().getOggettoByID(parseInt(request.getParameter("idObj")));
                 request.setAttribute("oggettoSelezionato", buyedObj);
                 request.getRequestDispatcher("riepilogoAcquisto.jsp").forward(request, response);      
             }
@@ -68,34 +72,31 @@ public class Cliente extends HttpServlet {
             
             //Ramo che gestisce la conferma d'acquisto dell'oggetto selezionato
             if(request.getParameter("idConfermedObj") != null){
-                Oggetto buyedObj = OggettiFactory.getInstance().getOggettoByID(request.getParameter("idConfermedObj"));
-                
-                String idConto = ClientiFactory.getInstance().getIdContoById((String)session.getAttribute("id"));
-                Conto contoCliente = ContoFactory.getInstance().getContoByID(idConto);
+                    Oggetto buyedObj = OggettiFactory.getInstance().getOggettoByID(parseInt(request.getParameter("idConfermedObj")));
+                    int idOb = buyedObj.getId(); //ID dell'oggetto comprato
+                    double saldoCliente = (ContoFactory.getInstance().getSaldoByID((Integer) session.getAttribute("id")));
+                    double prezzo = buyedObj.getPrezzo();
+                    
+                    //Prima di iniziare la transazione controllo se il saldo del cliente è sufficiente
+                    if( saldoCliente >= prezzo){
+                        try {
+                            int newQuantita = OggettiFactory.getInstance().confermaAcquisto(buyedObj,buyedObj.getIdVenditore(), 
+                                                                                    (int) session.getAttribute("id"));
 
-                Double prezzo = buyedObj.getPrezzo();
-                
-                if(contoCliente.getSaldo() >= prezzo && buyedObj.getQuantita() > 0){
-                    
-                    //Diminuisco di 1 il numero di oggetti a disposizione, fino ad esaurimento scorte
-                    buyedObj.subQuantita(); 
-                   
-                    contoCliente.subFromSaldo(prezzo); //Sottraggo i soldi al cliente
-                    
-                    //*Accredito i soldi al venditore
-                    Venditore objSeller =  buyedObj.getVenditore();                   
-                    Conto contoVenditore = ContoFactory.getInstance().getContoByID(objSeller.getIdConto());
-                    contoVenditore.addToSaldo(prezzo);
-                    request.getRequestDispatcher("confermaAcquisto.jsp").forward(request, response); 
-                }
-                else{
-                    if(buyedObj.getQuantita() < 1){
-                        request.getRequestDispatcher("oggettoTerminato.jsp").forward(request, response); 
+                            if( newQuantita <= 0 ){
+                                OggettiFactory.getInstance().rimuoviOggettoByID(parseInt(request.getParameter("idConfermedObj")));
+                            }
+
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
+                        request.setAttribute("listaOggetti", OggettiFactory.getInstance().getOggettiList());
+                        request.getRequestDispatcher("confermaAcquisto.jsp").forward(request, response); 
                     }
                     else{
                         request.getRequestDispatcher("denaroInsuff.jsp").forward(request, response); 
                     }
-                }
             }
         }
         else

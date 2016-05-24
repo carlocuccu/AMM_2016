@@ -4,7 +4,7 @@
     Author     : carlo
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,6 +39,9 @@
                     <h3>Sezioni</h3>
                     <ul>
                         <li><a href="login.html" id="login">Login</a></li>
+                        <c:if test="${loggedId == true}">
+                            <li><a href="venditore.html?logout=true">Logout</a></li>
+                        </c:if>
                         <li><a href="descrizione.html">Descrizione</a></li>
                         <li><a href="venditore.html">Venditore</a></li>
                         <li><a href="cliente.html">Cliente</a></li>

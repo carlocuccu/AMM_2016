@@ -31,7 +31,12 @@ public class Descrizione extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");       
+        
+        if( request.getParameter("logout") != null){
+            request.getSession().invalidate(); 
+            request.getRequestDispatcher("descrizione.jsp").forward(request, response);
+        }
         request.getRequestDispatcher("descrizione.jsp").forward(request, response); 
     }
 

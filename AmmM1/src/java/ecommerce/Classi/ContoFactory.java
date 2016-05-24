@@ -5,6 +5,11 @@
  */
 package ecommerce.Classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +17,8 @@ import java.util.ArrayList;
  * @author carlo
  */
 public class ContoFactory {
+    
+    String connectionString;
     
     private static ContoFactory singleton;
     public static ContoFactory getInstance() {
@@ -24,39 +31,47 @@ public class ContoFactory {
     private ArrayList<Conto> listaConti = new ArrayList<Conto>();
     
     public ContoFactory(){
-        
-        //Conto1
-        Conto conto1 = new Conto(2250.0, "cc1");
-        listaConti.add(conto1);
-        
-        //Conto2
-        Conto conto2 = new Conto(150.0, "cc2");
-        listaConti.add(conto2);
-        
-        //Conto3
-        Conto conto3 = new Conto(3650.0, "cc3");
-        listaConti.add(conto3);
-
-        //Conto4
-        Conto conto4 = new Conto(1200.0, "cc4");
-        listaConti.add(conto4);
-
-        //Conto5
-        Conto conto5 = new Conto(500.0, "cc5");
-        listaConti.add(conto5);
-        
-        //Conto6
-        Conto conto6 = new Conto(450.0, "cc6");
-        listaConti.add(conto6);
+       
     }
     
-    public Conto getContoByID(String id){
+    public double getSaldoByID(Integer id){
         
-        for(Conto c: listaConti){
-            if(c.id.equals(id)){
-                return c;
-            }
+        double current=0.0;
+        
+        try 
+        {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "carlocuccu", "0000");
+            String query = "select saldo from conto where" + " id = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            stmt.setInt(1, id); //Passo alla query l'id del conto di cui voglio conoscere il saldo
+            
+            ResultSet set = stmt.executeQuery();
+
+            if(set.next()) 
+            {
+                current = set.getDouble("saldo"); 
+                
+            } 
+            
+            stmt.close();
+            conn.close();
+            
+            
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
         }
-        return null;
+        return current;
     }
+    
+    public void setConnectionString(String s){
+    	this.connectionString = s;
+    }
+
+    public String getConnectionString(){
+    	return this.connectionString;
+    } 
 }

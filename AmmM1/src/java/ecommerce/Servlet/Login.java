@@ -8,10 +8,13 @@ package ecommerce.Servlet;
 import ecommerce.Classi.Utente;
 import ecommerce.Classi.Cliente;
 import ecommerce.Classi.ClientiFactory;
+import ecommerce.Classi.ContoFactory;
 import ecommerce.Classi.OggettiFactory;
 import ecommerce.Classi.UtentiFactory;
 import ecommerce.Classi.Venditore;
 import ecommerce.Classi.VenditoriFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -26,9 +29,33 @@ import javax.servlet.http.HttpSession;
  *
  * @author carlo
  */
-@WebServlet(name = "Login", urlPatterns = {"/login.html"})
+@WebServlet(name = "Login", urlPatterns = {"/login.html"}, loadOnStartup = 0)
 public class Login extends HttpServlet {
+    
+    private static final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+    private static final String DB_CLEAN_PATH = "../../web/WEB-INF/db/ammdb";
+    private static final String DB_BUILD_PATH = "WEB-INF/db/ammdb";
+    
+    @Override 
+    public void init(){
+        String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_BUILD_PATH;
 
+        try{
+            Class.forName(JDBC_DRIVER);
+        } 
+        catch (ClassNotFoundException ex) 
+        {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        OggettiFactory.getInstance().setConnectionString(dbConnection);
+        UtentiFactory.getInstance().setConnectionString(dbConnection);
+        ClientiFactory.getInstance().setConnectionString(dbConnection);
+        VenditoriFactory.getInstance().setConnectionString(dbConnection);
+        ContoFactory.getInstance().setConnectionString(dbConnection);
+    }
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,8 +73,7 @@ public class Login extends HttpServlet {
             HttpSession session = request.getSession(true);
             
             if(session != null){
-                String userID=(String)session.getAttribute("id");
-                
+                Integer userID=(Integer)session.getAttribute("id");
             }
              
             if(request.getParameter("Submit") != null)
@@ -55,44 +81,38 @@ public class Login extends HttpServlet {
                 String username = request.getParameter("Username");
                 String password = request.getParameter("Password");
                 
-                /*Creo una lista unica di Utenti unendo le liste dei Venditori e dei Clienti*/
-                ArrayList<Utente> listaUtenti = UtentiFactory.getInstance().getUserList();
-                
-                                                          
+                Utente u = UtentiFactory.getInstance().getUtente(username, password);
+                      
                 /*Controlli su Username e Password*/
-                for(Utente u : listaUtenti)
+                if(u != null)
                 {
-                    if(u.getUsername().equals(username) && u.getPassword().equals(password))
-                    {
-                        
-                        session.setAttribute("loggedId", true);
-                        session.setAttribute("id", u.getId()); //Inserisco l'Id dell'utente nell'atributo di sessione id
+                    session.setAttribute("loggedId", true);
+                    session.setAttribute("id", u.getId()); //Inserisco l'Id dell'utente nell'atributo di sessione id
 
-                        if(u instanceof Cliente)
-                        {
-                            session.setAttribute("isCliente", true);
-                            session.setAttribute("isVenditore", false);
-                            session.setAttribute("cliente", u);
-                            request.setAttribute("listaOggetti", OggettiFactory.getInstance().getOggettiList());      
-                            request.getRequestDispatcher("cliente.jsp").forward(request, response);
-                        }
-                        else
-                        {
-                            session.setAttribute("isVenditore", true);
-                            session.setAttribute("isCliente", false);
-                            session.setAttribute("venditore", u);
-                            request.getRequestDispatcher("venditore.jsp").forward(request, response);
-                        }
+                    if(u instanceof Cliente)
+                    {
+                        session.setAttribute("isCliente", true);
+                        session.setAttribute("isVenditore", false);
+                        session.setAttribute("cliente", u);
+                        request.setAttribute("listaOggetti", OggettiFactory.getInstance().getOggettiList());      
+                        request.getRequestDispatcher("cliente.jsp").forward(request, response);
                     }
                     else
                     {
-                        request.setAttribute("loginError", true);
-                    } 
+                        session.setAttribute("isVenditore", true);
+                        session.setAttribute("isCliente", false);
+                        session.setAttribute("venditore", u);
+                        request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                    }
                 }
-
+                else
+                {
+                    request.setAttribute("loginError", true);
+                } 
             }
-      
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            else{
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
     }
    
 

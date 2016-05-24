@@ -97,6 +97,26 @@ ul{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+.gestisciOggetto a:link, a:visited {
+    text-decoration: none;
+    background-color: #4B4B4B;
+    color: white;
+    width: 80px;
+    height: 13px;
+    padding: 8px 1px;
+    padding-bottom: 12px;
+    margin-bottom: 2px;
+    text-align: center;
+    display: inline-block;
+    
+}
+
+.gestisciOggetto  a:hover,a:active {
+    background-color: #242424;
+    text-decoration: underline;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 
 /*Formattazione di form e bottoni*/
 input{
@@ -141,6 +161,12 @@ textarea{
 textarea:focus{
     border: 3px solid #555;
 }
+
+.hidden{
+    display: none;
+    visibility:hidden;
+}
+
 
 /*Gestione ridimensionamento automatico delle immagini*/
 img {

@@ -1,17 +1,18 @@
 package ecommerce.Classi;
 
 public class Oggetto{
-        String id;
+        Integer id;
 	String nome;
 	String urlImmagine;
         String descrizione;
 	Double prezzo;
 	int quantita;
+        Integer idVenditore;
         Venditore seller;
 
 	/*Costruttore*/
 	public Oggetto(){
-            id="";
+            id=0;
             nome="";
             urlImmagine="";
             descrizione="";
@@ -20,11 +21,11 @@ public class Oggetto{
 	}
 
 	/*Metodi*/
-	public String getId(){
+	public Integer getId(){
 		return id;
 	}
 
-	public void setId(String id){
+	public void setId(Integer id){
 		this.id=id;
 	}
 
@@ -93,6 +94,15 @@ public class Oggetto{
         
         public Venditore getVenditore(){
             return seller;
+        }
+        
+        
+        public void setIdVenditore(Integer id){
+            this.idVenditore = id;
+        }
+        
+        public int getIdVenditore(){
+            return this.idVenditore;
         }
         
         public void subQuantita(){

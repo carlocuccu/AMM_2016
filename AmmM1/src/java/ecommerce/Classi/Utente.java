@@ -1,25 +1,25 @@
 package ecommerce.Classi;
 
 public abstract class Utente{
-        protected String id;
+        protected Integer id;
 	protected String username;
 	protected String password;
-        protected String idConto;
+        protected Integer idConto;
 	protected Conto saldo;
 
 
 	/*Costruttore*/
 	public Utente(){
-                id="";
+                id=0;
 		username="";
 		password="";
 	}
 
 	/*Metodi set e get*/
-        public String getId(){
+        public Integer getId(){
             return id;
         }
-        public void setId(String id){
+        public void setId(Integer id){
             this.id=id;
         }
         
@@ -39,11 +39,11 @@ public abstract class Utente{
 		this.password=password;
 	}
         
-        public void setIdConto(String idConto){
+        public void setIdConto(Integer idConto){
             this.idConto=idConto;
         }
         
-        public String getIdConto(){
+        public Integer getIdConto(){
             return idConto;
         }
         

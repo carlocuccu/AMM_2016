@@ -11,6 +11,7 @@ import ecommerce.Classi.OggettiFactory;
 import ecommerce.Classi.Oggetto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,24 +38,24 @@ public class Conferma extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-         if(request.getParameter("Confirm") != null){
-                Oggetto buyedObj = OggettiFactory.getInstance().getOggettoByID(request.getParameter("idObj"));
-                Conto contoCliente = ContoFactory.getInstance().getContoByID("id");
+       /*  if(request.getParameter("Confirm") != null){
+                Oggetto buyedObj = OggettiFactory.getInstance().getOggettoByID(parseInt(request.getParameter("idObj")));
+                Conto contoCliente = ContoFactory.getInstance().getContoByID(parseInt("id"));
                 Double prezzo = buyedObj.getPrezzo();
                 
                 if(contoCliente.getSaldo() >= prezzo ){
                     
                     contoCliente.subFromSaldo(prezzo); //Sottraggo i soldi al cliente
                     
-                    /*Accredito i soldi al venditore*/
+                    //Accredito i soldi al venditore*
                     ecommerce.Classi.Venditore objSeller =  buyedObj.getVenditore();                   
                     Conto contoVenditore = ContoFactory.getInstance().getContoByID(objSeller.getId());
                     
-                    contoVenditore.addToSaldo(prezzo);
-                   
+                    contoVenditore.addToSaldo(prezzo);  
+       
                     request.getRequestDispatcher("confermaAcquisto.jsp").forward(request, response); 
                 }
-            }
+            } */
         
         request.getRequestDispatcher("confermaAquisto.jsp").forward(request, response);
     }

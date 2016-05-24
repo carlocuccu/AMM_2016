@@ -5,6 +5,12 @@
  */
 package ecommerce.Classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +18,8 @@ import java.util.ArrayList;
  * @author carlo
  */
 public class VenditoriFactory {
+    
+    String connectionString;
     
     private static VenditoriFactory singleton;
     public static VenditoriFactory getInstance() {
@@ -26,49 +34,88 @@ public class VenditoriFactory {
     
     /*Costruttore*/
     private VenditoriFactory(){
-        
-        //Venditore 1
-        Venditore vend1 = new Venditore();
-        vend1.setId("v1");
-        vend1.setUsername("NotaShop");
-        vend1.setPassword("v1");
-        vend1.setIdConto("cc4");
-        vend1.setConto(ContoFactory.getInstance().getContoByID("cc4"));
-        listaVenditori.add(vend1);
-        
-        //Venditore 2
-        Venditore vend2 = new Venditore();
-        vend2.setId("v2");
-        vend2.setUsername("Music4All");
-        vend2.setPassword("v2");
-        vend2.setIdConto("cc5");
-        vend2.setConto(ContoFactory.getInstance().getContoByID("cc5"));
-        listaVenditori.add(vend2);
-        
-        //Venditore 3
-        Venditore vend3 = new Venditore();
-        vend3.setId("v3");
-        vend3.setUsername("SweetNote");
-        vend3.setPassword("v3");
-        vend3.setIdConto("cc6");
-        vend3.setConto(ContoFactory.getInstance().getContoByID("cc6"));
-        listaVenditori.add(vend3);
+    
     }
     
     
     /* Metodi */
+    
+    //Restituisce la lista di tutti i Venditori
     public ArrayList<Venditore> getVenditoriList()
     {
+         try 
+        {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "carlocuccu", "0000");
+            Statement stmt = conn.createStatement();
+            String query = "select * from "
+            + "venditore'";
+            ResultSet set = stmt.executeQuery(query);
+            
+             // ciclo sulle righe restituite
+            while(set.next()) 
+            {
+                Venditore current = new Venditore();
+                current.setId(set.getInt("id"));
+                current.setUsername(set.getString("username"));
+                current.setPassword(set.getString("password"));
+                current.setIdConto(set.getInt("idconto"));
+                listaVenditori.add(current);
+            } 
+            
+            stmt.close();
+            conn.close();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
         return listaVenditori;
     }
     
-    public Venditore getVenditoreByID(String id)
+    public Venditore getVenditoreByID(Integer id)
     {
-        for(Venditore v : listaVenditori)
+        try 
         {
-            if(v.id.equals(id))
-                return v;
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "carlocuccu", "0000");
+            String query = "select * from venditore " + "where id = ?";
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // Si associano i valori
+            stmt.setInt(1, id);
+            // Esecuzione query
+            ResultSet res = stmt.executeQuery();
+           
+             // ciclo sulle righe restituite
+            if(res.next()) 
+            {
+                Venditore current = new Venditore();
+                current.setId(res.getInt("id"));
+                current.setUsername(res.getString("username"));
+                current.setPassword(res.getString("password"));
+                current.setIdConto(res.getInt("idconto"));
+                
+                stmt.close();
+                conn.close();
+                return current;
+            }
+            
+            stmt.close();
+            conn.close();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
         }
         return null;
     }
+        
+    public void setConnectionString(String s){
+    	this.connectionString = s;
+    }
+
+    public String getConnectionString(){
+    	return this.connectionString;
+    } 
 }

@@ -34,6 +34,9 @@
                 <ul>
                     <li><a href="descrizione.html">Descrizione</a></li>
                     <li><a href="login.html">Login</a></li>
+                    <c:if test="${loggedId == true}">
+                        <li><a href="cliente.html?logout=true">Logout</a></li>
+                    </c:if>
                 </ul>
             </nav>
             

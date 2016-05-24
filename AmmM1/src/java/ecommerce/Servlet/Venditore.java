@@ -11,6 +11,10 @@ import ecommerce.Classi.UtentiFactory;
 import ecommerce.Classi.VenditoriFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,51 +52,55 @@ public class Venditore extends HttpServlet {
             }
             
             if(request.getParameter("Submit") != null){
+                try{
 
-                Oggetto newObj = new Oggetto();
-                newObj.setId("o6");
-                newObj.setVenditore(VenditoriFactory.getInstance().getVenditoreByID("id")); //Collego l'oggetto al venditore che l'ha inserito
-                newObj.setNome(request.getParameter("nomeOggetto"));
-                newObj.setUrlImmagine(request.getParameter("immagineOggetto"));
-                newObj.setDescrizione(request.getParameter("descrizioneOggetto"));
-                
-                //Controllo se i campi inseriti sono null
-                if(newObj.getNome() == null || newObj.getUrlImmagine() == null || newObj.getDescrizione() == null ){
-                    String inputError="Campi incompleti. Compila tutti i campi per poter continuare";
-                    request.setAttribute("inputError", inputError);
-                    request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                    Oggetto newObj = new Oggetto();                    
+                    newObj.setIdVenditore((Integer)session.getAttribute("id"));
+                    newObj.setNome(request.getParameter("nomeOggetto"));
+                    newObj.setUrlImmagine(request.getParameter("immagineOggetto"));
+                    newObj.setDescrizione(request.getParameter("descrizioneOggetto"));
+                    
+                    //Controllo se i campi inseriti sono null
+                    if(newObj.getNome() == null || newObj.getUrlImmagine() == null || newObj.getDescrizione() == null ){
+                        String inputError="Campi incompleti. Compila tutti i campi per poter continuare";
+                        request.setAttribute("inputError", inputError);
+                        request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                    }
+                    
+                    //Controllo se i campi inseriti sono tringhe vuote
+                    if(newObj.getNome() == "" || newObj.getUrlImmagine() == "" || newObj.getDescrizione() == "" ){
+                        String inputError="Campi incompleti. Compila tutti i campi per poter continuare";
+                        request.setAttribute("inputError", inputError);
+                        request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                    }
+                    
+                    /*Controlli sulla correttezza dei numeri inseriti*/
+                    try{
+                        newObj.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
+                    }
+                    catch(NumberFormatException exception){
+                        String inputError="Il prezzo inserito non è corretto. Inserisci un numero decimale ( , ).";
+                        request.setAttribute("inputError", inputError);
+                        request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                    }
+                    
+                    try{
+                        newObj.setQuantita(Integer.parseInt(request.getParameter("numeroOggetti")));
+                    }
+                    catch(NumberFormatException exception){
+                        String inputError="La quantità inserita non è corretta. Inserisci un numero.";
+                        request.setAttribute("inputError", inputError);
+                        request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                    }
+                    
+                    
+                    OggettiFactory.getInstance().addOggettoList(newObj); //Aggiungo l'oggetto appena inserito alla lista
+                    request.setAttribute("nuovoOggetto", newObj);
+                    request.getRequestDispatcher("riepilogoInserimento.jsp").forward(request, response);
                 }
-                
-                //Controllo se i campi inseriti sono tringhe vuote
-                if(newObj.getNome() == "" || newObj.getUrlImmagine() == "" || newObj.getDescrizione() == "" ){
-                    String inputError="Campi incompleti. Compila tutti i campi per poter continuare";
-                    request.setAttribute("inputError", inputError);
-                    request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                catch(SQLException e){
+                    e.printStackTrace();
                 }
-                
-                /*Controlli sulla correttezza dei numeri inseriti*/
-                try{
-                    newObj.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
-                }
-                catch(NumberFormatException exception){
-                    String inputError="Il prezzo inserito non è corretto. Inserisci un numero decimale ( , ).";
-                    request.setAttribute("inputError", inputError);
-                    request.getRequestDispatcher("venditore.jsp").forward(request, response);
-                }
-                
-                try{
-                    newObj.setQuantita(Integer.parseInt(request.getParameter("numeroOggetti")));
-                }
-                catch(NumberFormatException exception){
-                    String inputError="La quantità inserita non è corretta. Inserisci un numero.";
-                    request.setAttribute("inputError", inputError);
-                    request.getRequestDispatcher("venditore.jsp").forward(request, response);
-                }
-               
-                
-                OggettiFactory.getInstance().addOggettoList(newObj); //Aggiungo l'oggetto appena inserito alla lista
-                request.setAttribute("nuovoOggetto", newObj);
-                request.getRequestDispatcher("riepilogoInserimento.jsp").forward(request, response);
             }
             else{
                 request.getRequestDispatcher("venditore.jsp").forward(request, response);
