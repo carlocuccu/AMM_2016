@@ -99,6 +99,44 @@ public class OggettiFactory {
         return listaOggetti;
     }
     
+    public ArrayList<Oggetto> getOggettiList( String text){
+        
+        ArrayList<Oggetto> listaOggetti = new ArrayList<Oggetto>();
+        
+        try
+        {
+            Connection conn = DriverManager.getConnection(connectionString, "carlocuccu", "0000");
+            String query = "select * " +
+                           "from oggetto " + 
+                           "where oggetto.nome LIKE ? ";         
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // Assegna dati
+            text = "%"+text+"%";
+            stmt.setString(1, text);
+            
+            ResultSet set = stmt.executeQuery();
+            
+            while(set.next())
+            {
+                Oggetto current = new Oggetto();
+                current.setId(set.getInt("id"));
+                current.setNome(set.getString("nome"));
+                current.setUrlImmagine(set.getString("urlimmagine"));
+                current.setDescrizione(set.getString("descrizione"));
+                current.setPrezzo(set.getDouble("prezzo"));
+                current.setQuantita(set.getInt("quantita"));
+                current.setIdVenditore(set.getInt("idvenditore"));
+                listaOggetti.add(current);
+            }
+            
+            stmt.close();
+            conn.close();
+        }
+        catch(SQLException e)
+        {}
+        
+        return listaOggetti;
+    }
     
     public Oggetto getOggettoByID(Integer id)
     {   

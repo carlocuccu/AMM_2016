@@ -17,6 +17,11 @@
         <meta name="keywords" content="chitarre elettriche, chitarra acustica, bassi elettrici, bassi acustici, batterie acustiche,
               trombe, sax, custodia, jack">
         
+         <!-- jQuery -->
+        <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="js/researchScript.js"></script>
+        
+        
         <link rel="stylesheet" type="text/css" href="style.css" media="screen">
     </head>
     
@@ -45,7 +50,10 @@
                 
                 <h2>Seleziona un oggetto da acquistare</h2>            
                 
-                <table>
+                <label for="Filtra">Ricerca un oggetto</label>
+                <input type="text" id="Filtra" size="15"/>
+                
+                <table  id="tabOggetti">
                     
                     <tr class="intestazione">
                         <th>Oggetto</th>
@@ -57,7 +65,7 @@
                   
                     <c:forEach var="oggetto" items="${listaOggetti}">
                                   
-                        <tr>
+                        <tr id="riga">
                             <td>${oggetto.nome}</td>
                             <td> <img title="${oggetto.nome}"
                                       alt="${oggetto.nome}" src="${oggetto.urlImmagine}"
